@@ -8,6 +8,7 @@ import com.sonyericsson.extras.liveware.extension.util.registration.Registration
 public class HelloWatchExtensionService extends ExtensionService {
 
 	public static final String EXTENSION_KEY = "com.dantasse.hellosmartwatch.key";
+	public static final String LOG_TAG = "HelloWatchExtension";
 	
 	public HelloWatchExtensionService() {
 		super(EXTENSION_KEY);
