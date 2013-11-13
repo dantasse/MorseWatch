@@ -46,12 +46,12 @@ public class HelloWatchExtension extends ControlExtension {
         public void onSensorEvent(AccessorySensorEvent sensorEvent) {
             
             updateVisual(sensorEvent);
-            float[] vals = sensorEvent.getSensorValues();
-            try {
-                dataCsv.append(vals[0] + "," + vals[1] + "," + vals[2] + "," + "Looking_at\n");
-            } catch (IOException ioe) {
-                Log.e(HelloWatchExtensionService.LOG_TAG, "Error opening file");
-            }
+//            float[] vals = sensorEvent.getSensorValues();
+//            try {
+//                dataCsv.append(vals[0] + "," + vals[1] + "," + vals[2] + "," + "Looking_at\n");
+//            } catch (IOException ioe) {
+//                Log.e(HelloWatchExtensionService.LOG_TAG, "Error opening file");
+//            }
         }
     };
 
@@ -146,6 +146,22 @@ public class HelloWatchExtension extends ControlExtension {
         }
     }
 
+    /** where the classification happens */
+    private String determineGesture(float x, float y, float z) {
+        // janky classification method from a hand-copied SVM from weka
+        if (x < -4.285) {
+            return "Side";
+        } else if (z < 7.806) {
+            if (x < 5.511) {
+                return "Behind head";
+            } else { //x > 5.511
+                return "Raising hand";
+            }
+        } else { // x > -4.28 and z > 7.806)
+            return "Looking at";
+        }
+    }
+    
     private void updateVisual(AccessorySensorEvent sensorEvent) {
         if (sensorEvent != null) {
             float[] vals = sensorEvent.getSensorValues();
@@ -153,8 +169,11 @@ public class HelloWatchExtension extends ControlExtension {
             String yStr = String.format("%.2f", vals[1]);
             String zStr = String.format("%.2f", vals[2]);
             String valString = "x: " + xStr + "\ny: " + yStr + "\nz: " + zStr;
-            Log.d(HelloWatchExtensionService.LOG_TAG, valString);
-            textView.setText(valString);
+//            Log.d(HelloWatchExtensionService.LOG_TAG, valString);
+            String gesture = determineGesture(vals[0], vals[1], vals[2]);
+            
+            
+            textView.setText(valString + "\n" + gesture);
         }
         bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
         canvas = new Canvas(bitmap);
