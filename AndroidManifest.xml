@@ -44,6 +44,9 @@
                 <action android:name="com.sonyericsson.extras.aef.control.KEY_EVENT" />
                 <action android:name="com.sonyericsson.extras.aef.control.TOUCH_EVENT" />
                 <action android:name="com.sonyericsson.extras.aef.control.SWIPE_EVENT" />
+                <action android:name="com.sonyericsson.extras.aef.control.OBJECT_CLICK_EVENT" />
+                <action android:name="com.sonyericsson.extras.aef.control.VIBRATE" />
+                
             </intent-filter>
         </receiver>
     </application>

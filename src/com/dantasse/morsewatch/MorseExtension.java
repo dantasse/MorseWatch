@@ -19,6 +19,7 @@ public class MorseExtension extends ControlExtension {
     int height;
     Handler handler = new Handler();
     
+    
     ControlViewGroup mLayout;
 
     public MorseExtension(Context context, String hostAppPackageName) {
@@ -88,18 +89,22 @@ public class MorseExtension extends ControlExtension {
             }
         }
         handler.removeCallbacks(finishLetter);
-        handler.postDelayed(finishLetter, 1000);
+        handler.postDelayed(finishLetter, 300);
     }
     
     private Runnable finishLetter = new Runnable() {
         @Override
         public void run() {
+            if (touches.length() == 0) {
+                return; // this shouldn't happen... I guess it does b/c of a race condition? ugh.
+            }
             char letter = matchLetter(touches);
             Log.d(MorseExtensionService.LOG_TAG, "Letter finished. Touches: " + touches +
                     ", letter: " + letter);
             typedText += letter;
             updateView();
             touches = "";
+            startVibrator(50, 0, 0);
         }
     };
     
@@ -134,14 +139,10 @@ public class MorseExtension extends ControlExtension {
         return '?';
     }
     
-    // doesn't work, not sure why:
+    // not used now
     @Override
     public void onObjectClick(final ControlObjectClickEvent event) {
         Log.d(MorseExtensionService.LOG_TAG, "onObjectClick() " + event.getClickType());
-        Log.d(MorseExtensionService.LOG_TAG, "" + event.getLayoutReference());
-        if (event.getLayoutReference() != -1) {
-            mLayout.onClick(event.getLayoutReference());
-        }
     }
 
     public static int getSupportedControlWidth(Context context) {
