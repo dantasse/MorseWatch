@@ -24,7 +24,7 @@ import com.sonyericsson.extras.liveware.extension.util.sensor.AccessorySensorEve
 import com.sonyericsson.extras.liveware.extension.util.sensor.AccessorySensorException;
 import com.sonyericsson.extras.liveware.extension.util.sensor.AccessorySensorManager;
 
-public class HelloWatchExtension extends ControlExtension {
+public class MorseExtension extends ControlExtension {
 
     int width;
     int height;
@@ -59,7 +59,7 @@ public class HelloWatchExtension extends ControlExtension {
 
     }
 
-    public HelloWatchExtension(Context context, String hostAppPackageName) {
+    public MorseExtension(Context context, String hostAppPackageName) {
         super(context, hostAppPackageName);
 
         width = getSupportedControlWidth(context);
@@ -80,14 +80,14 @@ public class HelloWatchExtension extends ControlExtension {
 
     @Override
     public void onResume() {
-        Log.d(HelloWatchExtensionService.LOG_TAG, "Starting control");
+        Log.d(MorseExtensionService.LOG_TAG, "Starting control");
 
         try {
             File file = new File("/sdcard", "WatchAccelData.csv");
             dataCsv = new FileWriter(file, true /*append*/);
         } catch (IOException ioe) {
-            Log.e(HelloWatchExtensionService.LOG_TAG, "Error opening file");
-            Log.e(HelloWatchExtensionService.LOG_TAG, ioe.getMessage());
+            Log.e(MorseExtensionService.LOG_TAG, "Error opening file");
+            Log.e(MorseExtensionService.LOG_TAG, ioe.getMessage());
             ioe.printStackTrace();
         }
         // Note: Setting the screen to be always on will drain the accessory
@@ -102,11 +102,11 @@ public class HelloWatchExtension extends ControlExtension {
 
     @Override
     public void onPause() {
-        Log.d(HelloWatchExtensionService.LOG_TAG, "Stopping control");
+        Log.d(MorseExtensionService.LOG_TAG, "Stopping control");
         try {
             dataCsv.close();
         } catch (IOException ioe) {
-            Log.e(HelloWatchExtensionService.LOG_TAG, "error closing file");
+            Log.e(MorseExtensionService.LOG_TAG, "error closing file");
         }
         unregister();
     }
@@ -122,7 +122,7 @@ public class HelloWatchExtension extends ControlExtension {
     }
 
     private void register() {
-        Log.d(HelloWatchExtensionService.LOG_TAG, "Register listener");
+        Log.d(MorseExtensionService.LOG_TAG, "Register listener");
         if (accelerometer != null) {
             try {
                 // it seems that you can do this, or do
@@ -135,7 +135,7 @@ public class HelloWatchExtension extends ControlExtension {
                         Sensor.SensorInterruptMode.SENSOR_INTERRUPT_ENABLED);
                 // accelerometer.registerInterruptListener(mListener);
             } catch (AccessorySensorException e) {
-                Log.d(HelloWatchExtensionService.LOG_TAG, "Failed to register listener");
+                Log.d(MorseExtensionService.LOG_TAG, "Failed to register listener");
             }
         }
     }

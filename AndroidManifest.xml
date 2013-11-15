@@ -15,9 +15,9 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <service android:name=".HelloWatchExtensionService" />
+        <service android:name=".MorseExtensionService" />
 
-        <receiver android:name=".HelloWatchExtensionReceiver" >
+        <receiver android:name=".MorseExtensionReceiver" >
             <intent-filter>
 
                 <!-- Generic extension intents. -->

@@ -7,10 +7,10 @@ import com.sonyericsson.extras.liveware.aef.registration.Registration;
 import com.sonyericsson.extras.liveware.extension.util.ExtensionUtils;
 import com.sonyericsson.extras.liveware.extension.util.registration.RegistrationInformation;
 
-public class HelloWatchRegistrationInformation extends RegistrationInformation {
+public class MorseRegistrationInformation extends RegistrationInformation {
 	final Context context;
 	
-	protected HelloWatchRegistrationInformation(Context context) {
+	protected MorseRegistrationInformation(Context context) {
 		if (context == null) {
             throw new IllegalArgumentException("context == null");
         }
@@ -32,7 +32,7 @@ public class HelloWatchRegistrationInformation extends RegistrationInformation {
         values.put(Registration.ExtensionColumns.CONFIGURATION_TEXT, configurationText);
         values.put(Registration.ExtensionColumns.EXTENSION_ICON_URI, extensionIcon);
         values.put(Registration.ExtensionColumns.EXTENSION_KEY,
-                HelloWatchExtensionService.EXTENSION_KEY);
+                MorseExtensionService.EXTENSION_KEY);
         values.put(Registration.ExtensionColumns.HOST_APP_ICON_URI, iconHostapp);
         values.put(Registration.ExtensionColumns.NAME, extensionName);
         values.put(Registration.ExtensionColumns.NOTIFICATION_API_VERSION,
@@ -68,7 +68,7 @@ public class HelloWatchRegistrationInformation extends RegistrationInformation {
 
 	@Override
     public boolean isDisplaySizeSupported(int width, int height) {
-        return ((width == HelloWatchExtension.getSupportedControlWidth(context) && height == HelloWatchExtension
+        return ((width == MorseExtension.getSupportedControlWidth(context) && height == MorseExtension
                 .getSupportedControlHeight(context)));
     }
 }

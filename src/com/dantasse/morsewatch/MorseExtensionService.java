@@ -5,12 +5,12 @@ import com.sonyericsson.extras.liveware.extension.util.control.ControlExtension;
 import com.sonyericsson.extras.liveware.extension.util.registration.RegistrationInformation;
 
 
-public class HelloWatchExtensionService extends ExtensionService {
+public class MorseExtensionService extends ExtensionService {
 
 	public static final String EXTENSION_KEY = "com.dantasse.hellosmartwatch.key";
 	public static final String LOG_TAG = "HelloWatchExtension";
 	
-	public HelloWatchExtensionService() {
+	public MorseExtensionService() {
 		super(EXTENSION_KEY);
 	}
 	
@@ -22,7 +22,7 @@ public class HelloWatchExtensionService extends ExtensionService {
 	@Override
 	protected RegistrationInformation getRegistrationInformation() {
 		// TODO Auto-generated method stub
-		return new HelloWatchRegistrationInformation(this);
+		return new MorseRegistrationInformation(this);
 	}
 
 	@Override
@@ -33,6 +33,6 @@ public class HelloWatchExtensionService extends ExtensionService {
 
 	@Override
 	public ControlExtension createControlExtension(String hostAppPackageName) {
-		return new HelloWatchExtension(this, hostAppPackageName);
+		return new MorseExtension(this, hostAppPackageName);
 	}
 }
