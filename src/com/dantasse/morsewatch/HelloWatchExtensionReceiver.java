@@ -1,4 +1,4 @@
-package com.dantasse.hellosmartwatch;
+package com.dantasse.morsewatch;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

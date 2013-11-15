@@ -1,4 +1,4 @@
-package com.dantasse.hellosmartwatch;
+package com.dantasse.morsewatch;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -67,7 +67,7 @@ public class HelloWatchExtension extends ControlExtension {
 
         layout = new RelativeLayout(context);
         textView = new TextView(context);
-        textView.setText("Hello watch!");
+        textView.setText("MorseWatch!");
         textView.setTextSize(9);
         textView.setGravity(Gravity.LEFT);
         textView.setTextColor(Color.WHITE);

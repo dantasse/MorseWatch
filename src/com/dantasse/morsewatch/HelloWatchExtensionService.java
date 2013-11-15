@@ -1,4 +1,4 @@
-package com.dantasse.hellosmartwatch;
+package com.dantasse.morsewatch;
 
 import com.sonyericsson.extras.liveware.extension.util.ExtensionService;
 import com.sonyericsson.extras.liveware.extension.util.control.ControlExtension;
