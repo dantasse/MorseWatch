@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
 import com.sonyericsson.extras.liveware.aef.control.Control;
 import com.sonyericsson.extras.liveware.extension.util.control.ControlExtension;
@@ -21,7 +20,6 @@ public class MorseExtension extends ControlExtension {
     Handler handler = new Handler();
     
     ControlViewGroup mLayout;
-    TextView typedText; // where the letters go that you type with morse code
 
     public MorseExtension(Context context, String hostAppPackageName) {
         super(context, hostAppPackageName);
@@ -47,6 +45,7 @@ public class MorseExtension extends ControlExtension {
 //        }
     }
 
+    String typedText = "";
     @Override
     public void onResume() {
         Log.d(MorseExtensionService.LOG_TAG, "Starting control");
@@ -54,10 +53,13 @@ public class MorseExtension extends ControlExtension {
         // Note: Setting the screen to be always on will drain the accessory
         // battery. It is done here solely for demonstration purposes
         setScreenState(Control.Intents.SCREEN_STATE_ON);
-        
+        updateView();
+    }
+    
+    private void updateView() {
         Bundle b = new Bundle();
         b.putInt(Control.Intents.EXTRA_LAYOUT_REFERENCE, R.id.typed_text);
-        b.putString(Control.Intents.EXTRA_TEXT, "hello");
+        b.putString(Control.Intents.EXTRA_TEXT, typedText);
 
         showLayout(R.layout.sample_control, new Bundle[]{b});
     }
@@ -95,6 +97,8 @@ public class MorseExtension extends ControlExtension {
             char letter = matchLetter(touches);
             Log.d(MorseExtensionService.LOG_TAG, "Letter finished. Touches: " + touches +
                     ", letter: " + letter);
+            typedText += letter;
+            updateView();
             touches = "";
         }
     };
