@@ -22,5 +22,9 @@
     <string name="preference_key_clear">preference_key_clear</string>
     <string name="clear_success">All events have been deleted</string>
     <string name="clear_failure">Failed to delete events</string>
-
+    
+    <string name="dot">Dot</string>
+    <string name="dash">Dash</string>
+    <string name="pipeChar">|\n|\n|\n|\n|\n|\n|</string>
+    
 </resources>

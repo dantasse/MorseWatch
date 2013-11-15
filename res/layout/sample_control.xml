@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/smart_watch_2_control_width"
+    android:layout_height="@dimen/smart_watch_2_control_height"
+    tools:ignore="ContentDescription,PxUsage" >
+
+    <TextView
+        android:id="@+id/dot_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="12px"
+        android:layout_marginTop="6px"
+        android:text="@string/dot"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/smart_watch_2_text_size_large" />
+
+    <TextView
+        android:id="@+id/dash_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="12px"
+        android:layout_marginTop="6px"
+        android:text="@string/dash"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/smart_watch_2_text_size_large" />
+    
+    <TextView
+        android:id="@+id/pipe_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="0px"
+        android:layout_marginTop="0px"
+        android:text="@string/pipeChar"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/smart_watch_2_text_size_large" />
+    
+</RelativeLayout>

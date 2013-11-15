@@ -7,8 +7,8 @@ import com.sonyericsson.extras.liveware.extension.util.registration.Registration
 
 public class MorseExtensionService extends ExtensionService {
 
-	public static final String EXTENSION_KEY = "com.dantasse.hellosmartwatch.key";
-	public static final String LOG_TAG = "HelloWatchExtension";
+	public static final String EXTENSION_KEY = "com.dantasse.morsewatch.key";
+	public static final String LOG_TAG = "MorseWatch";
 	
 	public MorseExtensionService() {
 		super(EXTENSION_KEY);
