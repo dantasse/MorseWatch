@@ -1,4 +1,4 @@
-HelloSmartwatch
+MorseWatch
 ===============
 
-First project on Sony Smartwatch. Dead simple gesture recognizer.
+Morse code input. On a watch!
