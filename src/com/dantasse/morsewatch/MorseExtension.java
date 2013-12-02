@@ -76,20 +76,31 @@ public class MorseExtension extends ControlExtension {
 
 
     String touches = "";
+    long downTimestamp = 0;
     @Override
     public void onTouch(ControlTouchEvent event) {
         super.onTouch(event);
-        if (event.getAction() == Control.Intents.TOUCH_ACTION_RELEASE) {
-            if (event.getX() < width / 2) {
-                Log.d(MorseExtensionService.LOG_TAG, "dot, x: " + event.getX());
+        // can't use Control.Intents.TOUCH_ACTION_LONGPRESS because it's too long -
+        // something like 500 ms.
+        // you'll always get a PRESS then a RELEASE though. (I think.)
+        // TODO: if you hold too long it'll think the letter is over. should probably fix that.
+        Log.d(MorseExtensionService.LOG_TAG, "event: " + event.getAction());
+        switch(event.getAction()) {
+        case Control.Intents.TOUCH_ACTION_PRESS: downTimestamp = event.getTimeStamp(); break;
+        case Control.Intents.TOUCH_ACTION_RELEASE:
+            long duration = event.getTimeStamp() - downTimestamp;
+            if (duration < 200) {
+                Log.d(MorseExtensionService.LOG_TAG, "dot.  duration = " + duration);
                 touches += '.';
             } else {
-                Log.d(MorseExtensionService.LOG_TAG, "dash, x: " + event.getX());
+                Log.d(MorseExtensionService.LOG_TAG, "dash. duration = " + duration);                
                 touches += '-';
             }
+            break;
+        default: break;
         }
         handler.removeCallbacks(finishLetter);
-        handler.postDelayed(finishLetter, 300);
+        handler.postDelayed(finishLetter, 600);
     }
     
     private Runnable finishLetter = new Runnable() {
@@ -135,14 +146,13 @@ public class MorseExtension extends ControlExtension {
         else if (touches.equals("-..-")) return 'x';
         else if (touches.equals("-.--")) return 'y';
         else if (touches.equals("--..")) return 'z';
-
-        return '?';
+        else return '?';
     }
     
     // not used now
     @Override
     public void onObjectClick(final ControlObjectClickEvent event) {
-        Log.d(MorseExtensionService.LOG_TAG, "onObjectClick() " + event.getClickType());
+//        Log.d(MorseExtensionService.LOG_TAG, "onObjectClick() " + event.getClickType());
     }
 
     public static int getSupportedControlWidth(Context context) {
